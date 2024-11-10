@@ -32,3 +32,7 @@ target_include_directories(
 if (BENCODE_BUILD_TESTING)
   add_subdirectory(test)
 endif()
+
+if (BENCODE_FUZZING)
+  add_subdirectory(fuzz)
+endif()
