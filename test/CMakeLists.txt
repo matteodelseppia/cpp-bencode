@@ -12,6 +12,7 @@ set(TARGET_NAME cpp-bencode-tests)
 set(Sources
   "src/object_tests.cpp"
   "src/encoder_tests.cpp"
+  "src/decoder_tests.cpp"
 )
 
 add_executable(${TARGET_NAME} ${Sources})
@@ -20,7 +21,8 @@ target_link_libraries(
   ${TARGET_NAME} 
     PRIVATE
       ${PROJECT_NAME}
-      gtest_main)
+      gtest_main
+)
 
 enable_testing()
 gtest_discover_tests(${TARGET_NAME})

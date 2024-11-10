@@ -21,10 +21,10 @@ private:
   std::stringstream m_buffer;
 };
 
-namespace details {
+namespace details::encoder {
 
 void encode_to_buffer(std::stringstream&, const object&);
 
-} // namespace bencode::encoder::details
+} // namespace bencode::details::encoder
 
-} // namespace bencode::encoder
+} // namespace bencode

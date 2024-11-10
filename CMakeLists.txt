@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.2)
 
 set(PROJECT_NAME cpp-bencode)
-project(PROJECT_NAME)
+project(${PROJECT_NAME})
 
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -10,11 +10,13 @@ set(Headers
   "include/bencode/object.hpp"
   "include/bencode/common.hpp"
   "include/bencode/encoder.hpp"
+  "include/bencode/decoder.hpp"
 )
 
 set(Sources
   "src/object.cpp"
   "src/encoder.cpp"
+  "src/decoder.cpp"
 )
 
 add_library(${PROJECT_NAME} ${Headers} ${Sources})

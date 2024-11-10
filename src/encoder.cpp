@@ -3,27 +3,27 @@
 namespace bencode {
 
 encoder& encoder::put(const object& object_) {
-  details::encode_to_buffer(m_buffer, object_);
+  details::encoder::encode_to_buffer(m_buffer, object_);
   return *this;
 }
 
 encoder& encoder::put(const bencode::object::type::integer integer_value) {
-  details::encode_to_buffer(m_buffer, {integer_value});
+  details::encoder::encode_to_buffer(m_buffer, {integer_value});
   return *this;
 }
 
 encoder& encoder::put(const bencode::object::type::bytestring& bytestring_value) {
-  details::encode_to_buffer(m_buffer, {bytestring_value});
+  details::encoder::encode_to_buffer(m_buffer, {bytestring_value});
   return *this;
 }
 
 encoder& encoder::put(const bencode::object::type::dictionary& dictionary_value) {
-  details::encode_to_buffer(m_buffer, {dictionary_value});
+  details::encoder::encode_to_buffer(m_buffer, {dictionary_value});
   return *this;
 }
 
 encoder& encoder::put(const bencode::object::type::list& list_value) {
-  details::encode_to_buffer(m_buffer, {list_value});
+  details::encoder::encode_to_buffer(m_buffer, {list_value});
   return *this;
 }
 
@@ -36,7 +36,7 @@ std::string encoder::str() {
   return m_buffer.str();
 }
 
-namespace details {
+namespace details::encoder {
 
 void encode_to_buffer(std::stringstream& buffer, const object& object_) {
     
@@ -73,7 +73,7 @@ void encode_to_buffer(std::stringstream& buffer, const object& object_) {
   
 }
 
-} // namespace bencode::encoder::details
+} // namespace bencode::details::encoder
 
 } // namespace bencode::encoder
 
