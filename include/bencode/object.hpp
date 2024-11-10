@@ -1,5 +1,6 @@
 #pragma once
 
+#include <optional>
 #include <variant>
 #include <unordered_map>
 #include <vector>
@@ -10,41 +11,46 @@ namespace bencode {
 
 class object {
 public:
-
-  enum class type {
-    integer,
-    bytestring,
-    list,
-    dictionary
+  struct type {
+    using integer = int64_t;
+    using bytestring = std::string;
+    using list = std::vector<object>;
+    using dictionary = std::unordered_map<std::string, object>;
   };
 
-  type get_type() const;
+  object(const type::integer);
+  object(const type::bytestring&);
+  object(type::bytestring&&);
+  object(const type::list&);
+  object(type::list&&);
+  object(const type::dictionary&);
+  object(type::dictionary&&);
 
-  object(const int64_t);
-  object(std::string_view);
-  object(const std::vector<object>&);
-  object(const std::unordered_map<std::string_view, object>&);
+  bool is_integer() const;
+  bool is_bytestring() const;
+  bool is_list() const;
+  bool is_dictionary() const;
 
   template <typename T>
   std::enable_if_t<
-    std::is_same_v<std::decay_t<T>, int64_t> ||
-    std::is_same_v<std::decay_t<T>, std::string_view> ||
-    std::is_same_v<std::decay_t<T>, std::vector<object>> ||
-    std::is_same_v<std::decay_t<T>, std::unordered_map<std::string_view, object>>,
-    T
+    std::is_same_v<T, type::integer> ||
+    std::is_same_v<T, type::bytestring> ||
+    std::is_same_v<T, type::list> ||
+    std::is_same_v<T, type::dictionary>,
+    const T&
   >
   value() const {
     return std::get<T>(m_data);
   }
+
   
 private:
 
-  type m_type;
   std::variant<
-    int64_t,
-    std::string_view,
-    std::vector<object>,
-    std::unordered_map<std::string_view, object>
+    type::integer,
+    type::bytestring,
+    type::list,
+    type::dictionary
   > m_data;
 };
 
