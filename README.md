@@ -1,2 +1,2 @@
 # cpp-bencode
-C++11 library to encode/decode bencoding strings
+C++17 library to encode/decode bencoding strings
