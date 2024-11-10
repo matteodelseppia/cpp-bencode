@@ -10,7 +10,9 @@ include(GoogleTest)
 set(TARGET_NAME cpp-bencode-tests)
 
 set(Sources
-  "src/object_tests.cpp")
+  "src/object_tests.cpp"
+  "src/encoder_tests.cpp"
+)
 
 add_executable(${TARGET_NAME} ${Sources})
 
